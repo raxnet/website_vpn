@@ -57,24 +57,11 @@
         <pre><code>php composer.phar -n update</code></pre>
         <li>Hapus file zip setelah ekstraksi:</li>
         <pre><code>rm -rf website_vpn.zip</code></pre>
-        </pre>
     </ol>
 </div>
 
 <div>
-    <h2>6. Konfigurasi Direktori Situs dan Pseudo-Statis</h2>
-    <p>Untuk konfigurasi direktori situs dan pseudo-statis, lakukan langkah berikut:</p>
-    <ol>
-        <li>Edit situs yang ditambahkan > Konfigurasi > Direktori situs > Pilih <strong>/public</strong> dan simpan.</li>
-        <li>Setelah penambahan selesai, edit situs yang ditambahkan > Penulisan ulang URL dan tambahkan konfigurasi berikut:</li>
-        <pre><code>location / {
-    try_files $uri /index.php$is_args$args;
-}</code></pre>
-    </ol>
-</div>
-
-<div>
-    <h2>7. Tambahkan SSL ke Situs Web</h2>
+    <h2>6. Tambahkan SSL ke Situs Web</h2>
     <p>Untuk menambahkan SSL pada situs:</p>
     <ol>
         <li>Edit situs yang ditambahkan > Konfigurasi > SSL.</li>
