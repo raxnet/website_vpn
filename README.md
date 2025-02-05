@@ -1,4 +1,4 @@
-# Panduan Instalasi XMPlus dengan aaPanel (Ubuntu)
+# Panduan Instalasi Raxnet dengan aaPanel (Ubuntu)
 
 <div>
     <h2>1. Konfigurasi aaPanel</h2>
@@ -42,7 +42,7 @@
 </div>
 
 <div>
-    <h2>5. Instal XMPlus</h2>
+    <h2>5. Instal Raxnet</h2>
     <p>Setelah masuk ke server melalui SSH, ikuti langkah-langkah berikut:</p>
     <ol>
         <li>Masuk ke direktori situs Anda:</li>
@@ -50,13 +50,13 @@
         <li>Hapus file dalam direktori jika ada:</li>
         <pre><code>chattr -i .user.ini</code></pre>
         <pre><code>rm -rf .htaccess 404.html index.html</code></pre>
-        <li>Unduh dan ekstrak XMPlus:</li>
-        <pre><code>wget https://github.com/xcode75/XManagerPlus/releases/download/v20250104/XMPlus.zip</code></pre>
-        <pre><code>unzip XMPlus.zip</code></pre>
+        <li>Unduh dan ekstrak Raxnet:</li>
+        <pre><code>wget https://example.com/website_vpn.zip</code></pre>
+        <pre><code>unzip website_vpn.zip</code></pre>
         <li>Perbarui dependensi menggunakan Composer:</li>
         <pre><code>php composer.phar -n update</code></pre>
         <li>Hapus file zip setelah ekstraksi:</li>
-        <pre><code>rm -rf XMPlus.zip</code></pre>
+        <pre><code>rm -rf website_vpn.zip</code></pre>
         <li>Pindahkan dan atur izin untuk file <code>.user.ini</code>:</li>
         <pre><code>mv .user.ini /www/wwwroot/tld.com/public</code></pre>
         <pre><code>cd /www/wwwroot/tld.com/public</code></pre>
@@ -84,13 +84,4 @@
         <li>Periksa domain situs dan ajukan sertifikat SSL, aktifkan opsi <strong>Paksa HTTPS</strong>.</li>
         <li>Mulai ulang nginx setelah SSL diaktifkan.</li>
     </ol>
-</div>
-
-<div>
-    <h2>8. Tambahkan Pekerjaan Cron</h2>
-    <p>Untuk menambahkan pekerjaan cron, lakukan langkah berikut:</p>
-    <pre><code>crontab -l > cron.tmp</code></pre>
-    <pre><code>echo "* * * * * cd /www/wwwroot/tld.com && /usr/bin/php xmplus job:run >> /dev/null 2>&1" >> cron.tmp</code></pre>
-    <pre><code>crontab cron.tmp</code></pre>
-    <pre><code>rm -rf cron.tmp</code></pre>
 </div>
