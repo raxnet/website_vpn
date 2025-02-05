@@ -51,7 +51,7 @@
         <pre><code>chattr -i .user.ini</code></pre>
         <pre><code>rm -rf .htaccess 404.html index.html</code></pre>
         <li>Unduh dan ekstrak Raxnet:</li>
-        <pre><code>wget https://example.com/website_vpn.zip</code></pre>
+        <pre><code>git clone https://github.com/raxnet/website_vpn</code></pre>
         <pre><code>unzip website_vpn.zip</code></pre>
         <li>Perbarui dependensi menggunakan Composer:</li>
         <pre><code>php composer.phar -n update</code></pre>
@@ -59,7 +59,7 @@
         <pre><code>rm -rf website_vpn.zip</code></pre>
         <li>Pindahkan dan atur izin untuk file <code>.user.ini</code>:</li>
         <pre><code>mv .user.ini /www/wwwroot/tld.com/public</code></pre>
-        <pre><code>cd /www/wwwroot/tld.com/public</code></pre>
+        <pre><code>cd /www/wwwroot/tld.com</code></pre>
         <pre><code>chattr +i .user.ini</code></pre>
     </ol>
 </div>
