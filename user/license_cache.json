@@ -1,0 +1,14 @@
+{
+    "valid_domains": [
+        {
+            "domain": "panel.raxnet.my.id",
+            "expiry_date": "2025-12-31",
+            "token": "Aqus97shwGsjd"
+        },
+        {
+            "domain": "domain2.com",
+            "expiry_date": "2025-11-30",
+            "token": "another-unique-token"
+        }
+    ]
+}

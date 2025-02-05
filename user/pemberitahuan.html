@@ -1,0 +1,120 @@
+<!-- Pop-up Notification -->
+<div id="popup-notification" class="popup-container">
+    <h4 class="popup-title">Pemberitahuan</h4>
+    <p class="popup-message">
+        Kami menyewakan skrip webapp ini dengan harga <strong>50 IDR/bulan</strong> termasuk otorisasi domain.
+    </p>
+
+    <ul class="popup-list">
+        <li><strong>Harga:</strong> 50 IDR per bulan.</li>
+        <li><strong>Otorisasi hanya untuk domain terdaftar.</strong></li>
+    </ul>
+
+    <p class="popup-subtitle"><strong>Login Admin:</strong></p>
+    <p class="popup-credential"><strong>Username:</strong> admin</p>
+    <p class="popup-credential"><strong>Password:</strong> 123qweasd</p>
+
+    <h5 class="popup-warning">Kebijakan Penggunaan</h5>
+    <p class="popup-policy">
+        Kami hanya menyediakan <strong>1 server uji coba</strong>. Jika 1 user terdeteksi membuat lebih dari <strong>2 akun layanan</strong>, maka sistem akan otomatis memblokir akses secara permanen.
+    </p>
+
+    <button onclick="closePopup()" class="popup-button">Tutup</button>
+</div>
+
+<!-- CSS Khusus untuk Pop-up -->
+<style>
+    .popup-container {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        color: #333;
+        padding: 12px;
+        border-radius: 6px;
+        border: 2px solid #ff5722;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        font-size: 12px;
+        max-width: 360px;
+        width: 100%;
+        z-index: 99999;
+        text-align: left;
+    }
+    
+    .popup-title {
+        font-size: 14px;
+        color: #ff5722;
+        margin-bottom: 8px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .popup-message {
+        margin: 0;
+        font-size: 12px;
+        line-height: 1.4;
+        text-align: center;
+    }
+
+    .popup-list {
+        font-size: 12px;
+        padding-left: 15px;
+        list-style-type: disc;
+        margin: 5px 0;
+    }
+
+    .popup-subtitle {
+        font-size: 12px;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .popup-credential {
+        font-size: 12px;
+        text-align: center;
+        margin: 2px 0;
+    }
+
+    .popup-warning {
+        font-size: 12px;
+        color: #d32f2f;
+        margin-top: 10px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .popup-policy {
+        font-size: 12px;
+        margin-top: 5px;
+        text-align: center;
+    }
+
+    .popup-button {
+        background-color: #ff5722;
+        color: white;
+        border: none;
+        padding: 6px 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        display: block;
+        margin: 12px auto 0;
+    }
+</style>
+
+<!-- JavaScript untuk Pop-up -->
+<script>
+    function showPopup() {
+        document.querySelector('.popup-container').style.display = 'block';
+    }
+
+    function closePopup() {
+        document.querySelector('.popup-container').style.display = 'none';
+    }
+
+    window.onload = function() {
+        setTimeout(showPopup, 500);
+    };
+</script>
