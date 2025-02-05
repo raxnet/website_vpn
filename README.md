@@ -2,9 +2,9 @@
 
 <div>
     <h2>1. Konfigurasi aaPanel</h2>
-    <p>Anda perlu memilih sistem Anda di aaPanel untuk mendapatkan metode instalasi. Di sini, CentOS 7+ digunakan sebagai lingkungan sistem untuk instalasi.</p>
-    <p>Pastikan untuk menggunakan CentOS 7+ untuk menginstal aaPanel, sistem lain mungkin memiliki masalah yang tidak diketahui.</p>
-    <pre><code>yum install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh</code></pre>
+    <p>Anda perlu memilih sistem Anda di aaPanel untuk mendapatkan metode instalasi. Di sini, Ubuntu digunakan sebagai lingkungan sistem untuk instalasi.</p>
+    <p>Pastikan untuk menggunakan Ubuntu 18.04+ untuk menginstal aaPanel, sistem lain mungkin memiliki masalah yang tidak diketahui.</p>
+    <pre><code>sudo apt update && sudo apt install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh</code></pre>
     <p>Setelah instalasi selesai, masuk ke aaPanel untuk menginstal lingkungan. Pilih metode instalasi lingkungan menggunakan LNMP dengan komponen berikut:</p>
     <ul>
         <li><strong>Bahasa Indonesia</strong>: Nginx ☑️, MySQL ☑️, PHP 7.4 ☑️, phpMyAdmin</li>
@@ -13,11 +13,11 @@
 </div>
 
 <div>
-    <h2>2. Instal Ioncube dan fileinfo</h2>
+    <h2>2. Instal fileinfo</h2>
     <p>Pada aaPanel:</p>
     <ol>
         <li>Buka <strong>App Store</strong> > <strong>PHP 7.4</strong> > <strong>Pengaturan</strong> > <strong>Instal ekstensi</strong></li>
-        <li>Instal <strong>Ioncube</strong> dan <strong>fileinfo</strong>.</li>
+        <li>Instal <strong>fileinfo</strong>.</li>
     </ol>
 </div>
 
@@ -85,16 +85,4 @@
     <pre><code>echo "* * * * * cd /www/wwwroot/tld.com && /usr/bin/php xmplus job:run >> /dev/null 2>&1" >> cron.tmp</code></pre>
     <pre><code>crontab cron.tmp</code></pre>
     <pre><code>rm -rf cron.tmp</code></pre>
-</div>
-
-<div>
-    <h2>Buat Akun Administrator</h2>
-    <p>Setelah masuk ke server melalui SSH, kunjungi jalur situs:</p>
-    <pre><code>cd /www/wwwroot/tld.com</code></pre>
-
-    <p>Masukkan perintah:</p>
-    <pre><code>php xmplus admin</code></pre>
-
-    <p>Unduh aplikasi:</p>
-    <pre><code>php xmplus download</code></pre>
 </div>
