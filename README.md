@@ -57,10 +57,7 @@
         <pre><code>php composer.phar -n update</code></pre>
         <li>Hapus file zip setelah ekstraksi:</li>
         <pre><code>rm -rf website_vpn.zip</code></pre>
-        <li>Pindahkan dan atur izin untuk file <code>.user.ini</code>:</li>
-        <pre><code>mv .user.ini /www/wwwroot/tld.com/public</code></pre>
-        <pre><code>cd /www/wwwroot/tld.com</code></pre>
-        <pre><code>chattr +i .user.ini</code></pre>
+        </pre>
     </ol>
 </div>
 
