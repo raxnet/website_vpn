@@ -32,7 +32,7 @@ aaPanel > Website > Add site.
 - Pilih PHP-74 di PHP Version
 
 ### 5. Instal Raxnet
-Setelah login ke server melalui SSH, kunjungi path situs: `cd /www/wwwroot/tld.com`
+Setelah login ke server melalui SSH, kunjungi path situs: `cd /www/wwwroot/raxnet.my.id`
 
 Perintah-perintah berikut perlu dijalankan di direktori situs.
 
