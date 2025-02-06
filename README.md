@@ -44,7 +44,7 @@ rm -rf .htaccess 404.html index.html
 
 ### Jalankan perintah untuk menginstal Raxnet
 
-cd /www/wwwroot/tld.com
+cd /www/wwwroot/raxnet.my.id
 
 wget https://github.com/user-attachments/files/18687948/raxnet.zip
 
@@ -54,9 +54,9 @@ composer install
 
 rm -rf raxnet.zip
 
-mv .user.ini /www/wwwroot/tld.com/public
+mv .user.ini /www/wwwroot/raxnet.my.id
 
-cd /www/wwwroot/tld.com/public
+cd /www/wwwroot/raxnet.my.id
 
 chattr +i .user.ini
 
@@ -69,10 +69,10 @@ Server connection collation: `utf8mb4_unicode_ci`
 Buat database baru dengan: `utf8mb4_unicode_ci` 
 
 - Import `database.sql` dengan phpMyAdmin.  
-  - path file: `/www/wwwroot/tld.com/database/database.sql`  
+  - path file: `/www/wwwroot/raxnet.my.id/database/database.sql`  
   - NB: Jangan gunakan panel aaPanel untuk mengimpor sql
 
-- Edit konfigurasi di `/www/wwwroot/tld.com/config/config.php`  
+- Edit konfigurasi di `/www/wwwroot/raxnet.my.id/config/config.php`  
   - Anda dapat mengubah path login admin sesuai dengan preferensi Anda. Harus dimulai dengan `/`.  
   - Isi informasi database Anda (gunakan root sebagai username dan password root di config.php).
 
@@ -82,8 +82,9 @@ Edit situs yang ditambahkan > Conf > Site directory > Pilih running directory `/
 
 Setelah penambahan selesai, edit situs yang ditambahkan > URL rewrite untuk mengisi informasi pseudo-static.
 
-location / { try_files $uri /index.php$is_args$args; }
-
+location / {
+        try_files $uri $uri/ /$uri.php?$args;
+    }
 ### 7. Tambahkan SSL ke website
 
 Edit situs yang ditambahkan > Conf > SSL  
