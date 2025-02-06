@@ -78,7 +78,6 @@ Buat database baru dengan: `utf8mb4_unicode_ci`
 
 ### 6. Konfigurasi direktori situs dan pseudo-static
 
-Edit situs yang ditambahkan > Conf > Site directory > Pilih running directory `/public` dan simpan.
 
 Setelah penambahan selesai, edit situs yang ditambahkan > URL rewrite untuk mengisi informasi pseudo-static.
 
