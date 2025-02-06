@@ -2,11 +2,11 @@
 
 ### 1. Konfigurasi aaPanel
 
-Anda perlu memilih sistem yang digunakan di aaPanel untuk mendapatkan metode instalasi. Di sini, CentOS 7+ digunakan sebagai lingkungan sistem untuk instalasi.
+Anda perlu memilih sistem yang digunakan di aaPanel untuk mendapatkan metode instalasi. Di sini, ubuntu 20.04 digunakan sebagai lingkungan sistem untuk instalasi.
 
-Pastikan untuk menggunakan CentOS 7+ untuk menginstal aaPanel, karena sistem lain mungkin memiliki masalah yang tidak diketahui.
+Pastikan untuk menggunakan ubuntu 20.04 untuk menginstal aaPanel, karena sistem lain mungkin memiliki masalah yang tidak diketahui.
 
-yum install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh
+apt install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh
 
 Setelah instalasi selesai, masuk ke aaPanel untuk menginstal lingkungan.
 
