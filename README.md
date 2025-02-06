@@ -1,107 +1,128 @@
 
 1. Konfigurasi aaPanel
 
-Anda perlu memilih sistem yang digunakan di aaPanel untuk mendapatkan metode instalasi. Di sini, ubuntu 20.04 digunakan sebagai lingkungan sistem untuk instalasi.
-
-Pastikan untuk menggunakan ubuntu 20.04 untuk menginstal aaPanel, karena sistem lain mungkin memiliki masalah yang tidak diketahui.
+Pastikan server Anda menggunakan Ubuntu 20.04 dan lakukan instalasi aaPanel dengan perintah berikut:
 
 apt install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh
 
-Setelah instalasi selesai, masuk ke aaPanel untuk menginstal lingkungan.
-
-Pilih metode instalasi lingkungan menggunakan LNMP dan periksa informasi berikut:
+Setelah instalasi selesai, akses aaPanel melalui browser dan pilih LNMP untuk instalasi lingkungan:
 
 ☑️ Nginx
+
 ☑️ MySQL
+
 ☑️ PHP 7.4
+
 ☑️ phpMyAdmin
 
-Pilih "Fast" untuk kompilasi dan instalasi.
 
-2. Instal Ioncube dan fileinfo
-
-aaPanel > App Store > PHP 7.4 > Setting > Install extensions > Ioncube, fileinfo.
-
-3. Hapus fungsi yang dinonaktifkan
-
-aaPanel > App Store > PHP 7.4 > Setting > Disabled functions > hapus dari daftar (exec, system, putenv, proc_open).
-
-4. Tambahkan Website
-
-aaPanel > Website > Add site.
-
-Isi nama domain yang mengarah ke server di kolom Domain
-
-Pilih MySQL di Database
-
-Pilih PHP-74 di PHP Version
+Pilih opsi Fast untuk kompilasi dan instalasi.
 
 
-5. Instal Raxnet
+---
 
-Setelah login ke server melalui SSH, kunjungi path situs: cd /www/wwwroot/raxnet.my.id
+2. Instalasi Ioncube dan fileinfo
 
-Perintah-perintah berikut perlu dijalankan di direktori situs.
+aaPanel > App Store > PHP 7.4 > Setting > Install Extensions
 
-Hapus file di direktori
+Install Ioncube dan fileinfo.
 
-chattr -i .user.ini
 
-rm -rf .htaccess 404.html index.html
 
-Jalankan perintah untuk menginstal Raxnet
+---
 
-cd /www/wwwroot/raxnet.my.id
+3. Menghapus Fungsi yang Dinonaktifkan
 
-wget https://github.com/raxnet/website_vpn/releases/download/raxnet/raxnet.zip
+aaPanel > App Store > PHP 7.4 > Setting > Disabled Functions
 
-unzip raxnet.zip
+Hapus fungsi seperti exec, system, putenv, dan proc_open.
 
+
+
+---
+
+4. Menambahkan Website
+
+aaPanel > Website > Add Site
+
+Isi nama domain yang mengarah ke server di kolom Domain.
+
+Pilih MySQL di Database.
+
+Pilih PHP-74 di PHP Version.
+
+
+
+---
+
+5. Menginstal Aplikasi dari GitHub
+
+Setelah masuk ke server melalui SSH, jalankan perintah berikut untuk mengkloning aplikasi dari GitHub:
+
+cd /www/wwwroot/your-site-folder
+git clone https://github.com/username/repository-name.git
+
+Catatan: Gantilah username/repository-name dengan username dan nama repository GitHub yang sesuai.
+
+Setelah mengkloning repositori, jalankan perintah berikut untuk menginstal dependensi:
+
+cd /www/wwwroot/your-site-folder
 composer install
 
-rm -rf raxnet.zip
 
-mv .user.ini /www/wwwroot/raxnet.my.id
+---
 
-cd /www/wwwroot/raxnet.my.id
+6. Konfigurasi Database
 
-chattr +i .user.ini
+Masuk ke phpMyAdmin melalui aaPanel dan buat database baru.
 
-aaPanel > Databases > Root password
+Import file SQL ke dalam database dengan phpMyAdmin.
 
-Login ke phpMyAdmin dengan username root dan password root database Anda.
-
-Server connection collation: utf8mb4_unicode_ci
-
-Buat database baru dengan: utf8mb4_unicode_ci
-
-Import database.sql dengan phpMyAdmin.
-
-path file: /www/wwwroot/raxnet.my.id/database/database.sql
-
-NB: Jangan gunakan panel aaPanel untuk mengimpor sql
-
-
-Edit konfigurasi di /www/wwwroot/raxnet.my.id/config/config.php
-
-Anda dapat mengubah path login admin sesuai dengan preferensi Anda. Harus dimulai dengan /.
-
-Isi informasi database Anda (gunakan root sebagai username dan password root di config.php).
+Path file SQL: /www/wwwroot/your-site-folder/database/database.sql.
 
 
 
-6. Konfigurasi direktori situs dan pseudo-static
+Catatan: Jangan gunakan aaPanel untuk mengimpor SQL, lebih baik menggunakan phpMyAdmin.
 
-Setelah penambahan selesai, edit situs yang ditambahkan > URL rewrite untuk mengisi informasi pseudo-static.
+
+---
+
+7. Edit Konfigurasi
+
+Edit file konfigurasi aplikasi di /www/wwwroot/your-site-folder/config/config.php:
+
+Ubah pengaturan seperti path login admin sesuai preferensi Anda.
+
+Isi informasi database (gunakan username root dan password root di config.php).
+
+
+
+---
+
+8. Konfigurasi Direktori dan Pseudo-Static
+
+Edit pengaturan URL Rewrite untuk situs Anda dengan menambahkan kode berikut pada bagian Conf:
 
 location / {
-try_files $uri $uri/ /$uri.php?$args;
+    try_files $uri $uri/ /$uri.php?$args;
 }
 
-7. Tambahkan SSL ke website
 
-Edit situs yang ditambahkan > Conf > SSL
-Periksa domain situs dan ajukan sertifikat, aktifkan Force HTTPS.
+---
 
-Restart nginx
+9. Menambahkan SSL ke Website
+
+Edit Situs > Conf > SSL
+
+Periksa domain situs dan ajukan sertifikat SSL.
+
+Aktifkan Force HTTPS.
+
+Restart Nginx untuk menerapkan perubahan.
+
+
+
+---
+
+Dengan mengikuti langkah-langkah ini, Anda akan dapat mengonfigurasi dan menginstal aplikasi di server menggunakan aaPanel dan GitHub.
 
