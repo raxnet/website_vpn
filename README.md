@@ -120,17 +120,10 @@ Untuk melindungi situs Anda dari serangan bot dan mengoptimalkan performa, Anda 
 ---
 
 ## 9. API Endpoint ke Server X-Ray
-peringatan jangan install backend di server yang sama dengan fronend (aapanel)
+peringatan jangan install backend di server yang sama dengan fronend (aapanel)❗❗❗❗❗❗❗❗❗❗
 
 
 
-Untuk menghubungkan sistem Anda dengan server X-Ray, Anda dapat mengatur endpoint API sebagai berikut:
-
-1. Buka konfigurasi API di aplikasi Anda.
-2. Masukkan URL endpoint X-Ray yang sesuai dengan server Anda.
-3. Pastikan koneksi API diatur dengan benar.
-
----
 
 ## 10. Instalasi Server Backend
 
