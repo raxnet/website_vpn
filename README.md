@@ -149,7 +149,7 @@ Untuk menginstal server backend, ikuti langkah-langkah berikut:
 Untuk memperbarui sistem, jalankan perintah berikut:
 
 ```bash
-wget https://raw.githubusercontent.com/raxnet/bon/main/update.sh && chmod +x update.sh && ./update.sh
+wget https://raw.githubusercontent.com/raxnet/vpn/main/update.sh && chmod +x update.sh && ./update.sh
 ```
 
 ---
