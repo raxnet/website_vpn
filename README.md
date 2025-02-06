@@ -1,44 +1,149 @@
-<div class="twilight-container" style="background-color: #1a1a2e; color: #f0f0f0; font-family: 'Roboto', sans-serif; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);">
-  <h1 style="color: #f3a847;">Menggunakan aaPanel untuk Deploy Manual</h1>
+Benar, di dalam file README.md, Anda bisa menggunakan struktur HTML untuk mempercantik tampilan atau menambahkan elemen-elemen yang tidak bisa dilakukan hanya dengan Markdown biasa. Berikut adalah contoh yang telah menggunakan elemen HTML untuk struktur kontennya di README.md:
 
-  <h2 style="color: #f3a847;">1. Konfigurasi aaPanel</h2>
-  <p style="line-height: 1.6;">Anda perlu memilih sistem yang digunakan di aaPanel untuk mendapatkan metode instalasi. Di sini, ubuntu 20.04 digunakan sebagai lingkungan sistem untuk instalasi.</p>
-  <p style="line-height: 1.6;">Pastikan untuk menggunakan ubuntu 20.04 untuk menginstal aaPanel, karena sistem lain mungkin memiliki masalah yang tidak diketahui.</p>
-  <pre style="background-color: #282845; padding: 15px; border-radius: 5px; overflow-x: auto; color: #f0f0f0; font-family: 'Courier New', monospace;">
-    <code style="background-color: #282845; color: #f0f0f0; padding: 2px 4px; border-radius: 3px;">apt install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh</code>
-  </pre>
+# Proyek Instalasi dengan aaPanel dan GitHub
 
-  <h2 style="color: #f3a847;">2. Instal Ioncube dan fileinfo</h2>
-  <p style="line-height: 1.6;">aaPanel > App Store > PHP 7.4 > Setting > Install extensions > Ioncube, fileinfo.</p>
+Panduan ini menjelaskan cara mengonfigurasi server menggunakan **aaPanel** dan menginstal aplikasi dari **GitHub**. Ikuti langkah-langkah di bawah ini untuk mengatur server dan menjalankan aplikasi Anda dengan mudah.
 
-  <h2 style="color: #f3a847;">3. Hapus fungsi yang dinonaktifkan</h2>
-  <p style="line-height: 1.6;">aaPanel > App Store > PHP 7.4 > Setting > Disabled functions > hapus dari daftar (exec, system, putenv, proc_open).</p>
+## 1. Konfigurasi aaPanel
 
-  <h2 style="color: #f3a847;">4. Tambahkan Website</h2>
-  <p style="line-height: 1.6;">aaPanel > Website > Add site.</p>
-  <p style="line-height: 1.6;">Isi nama domain yang mengarah ke server di kolom Domain.</p>
-  <p style="line-height: 1.6;">Pilih MySQL di Database.</p>
-  <p style="line-height: 1.6;">Pilih PHP-74 di PHP Version.</p>
+Instal **aaPanel** pada server yang menjalankan **Ubuntu 20.04** dengan menjalankan perintah berikut:
 
-  <h2 style="color: #f3a847;">5. Instal Raxnet</h2>
-  <p style="line-height: 1.6;">Setelah login ke server melalui SSH, kunjungi path situs: <code>cd /www/wwwroot/raxnet.my.id</code></p>
-  <p style="line-height: 1.6;">Perintah-perintah berikut perlu dijalankan di direktori situs.</p>
-  <pre style="background-color: #282845; padding: 15px; border-radius: 5px; overflow-x: auto; color: #f0f0f0; font-family: 'Courier New', monospace;">
-    <code style="background-color: #282845; color: #f0f0f0; padding: 2px 4px; border-radius: 3px;">chattr -i .user.ini</code>
-  </pre>
-  <pre style="background-color: #282845; padding: 15px; border-radius: 5px; overflow-x: auto; color: #f0f0f0; font-family: 'Courier New', monospace;">
-    <code style="background-color: #282845; color: #f0f0f0; padding: 2px 4px; border-radius: 3px;">rm -rf .htaccess 404.html index.html</code>
-  </pre>
+```bash
+apt install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh
 
-  <h2 style="color: #f3a847;">6. Konfigurasi direktori situs dan pseudo-static</h2>
-  <p style="line-height: 1.6;">Setelah penambahan selesai, edit situs yang ditambahkan > URL rewrite untuk mengisi informasi pseudo-static.</p>
-  <pre style="background-color: #282845; padding: 15px; border-radius: 5px; overflow-x: auto; color: #f0f0f0; font-family: 'Courier New', monospace;">
-    <code style="background-color: #282845; color: #f0f0f0; padding: 2px 4px; border-radius: 3px;">location / { try_files $uri $uri/ /$uri.php?$args; }</code>
-  </pre>
+Setelah instalasi selesai, akses aaPanel melalui browser dan pilih opsi LNMP untuk instalasi lingkungan dengan konfigurasi berikut:
 
-  <h2 style="color: #f3a847;">7. Tambahkan SSL ke website</h2>
-  <p style="line-height: 1.6;">Edit situs yang ditambahkan > Conf > SSL. Periksa domain situs dan ajukan sertifikat, aktifkan Force HTTPS.</p>
+<ul>
+  <li>☑️ <b>Nginx</b></li>
+  <li>☑️ <b>MySQL</b></li>
+  <li>☑️ <b>PHP 7.4</b></li>
+  <li>☑️ <b>phpMyAdmin</b></li>
+</ul>Pilih Fast untuk kompilasi dan instalasi.
 
-  <h2 style="color: #f3a847;">Restart nginx</h2>
-  <button class="btn" style="background-color: #f3a847; color: #1a1a2e; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;">Restart Nginx</button>
-</div>
+
+---
+
+2. Instalasi Ioncube dan fileinfo
+
+1. Akses aaPanel > App Store > PHP 7.4 > Setting.
+
+
+2. Pilih Install Extensions dan tambahkan ekstensi Ioncube dan fileinfo.
+
+
+
+
+---
+
+3. Menghapus Fungsi yang Dinonaktifkan
+
+Untuk keamanan, hapus fungsi yang tidak diinginkan dengan langkah berikut:
+
+<ol>
+  <li>Akses <b>aaPanel</b> > <b>App Store</b> > <b>PHP 7.4</b> > <b>Setting</b> > <b>Disabled Functions</b>.</li>
+  <li>Hapus fungsi-fungsi berikut: <code>exec</code>, <code>system</code>, <code>putenv</code>, dan <code>proc_open</code>.</li>
+</ol>
+---
+
+4. Menambahkan Website
+
+Untuk menambahkan situs ke aaPanel, lakukan langkah-langkah berikut:
+
+<ol>
+  <li><b>aaPanel</b> > <b>Website</b> > <b>Add Site</b>.</li>
+  <li>Isi nama domain yang mengarah ke server di kolom <b>Domain</b>.</li>
+  <li>Pilih <b>MySQL</b> di <b>Database</b> dan <b>PHP-74</b> di <b>PHP Version</b>.</li>
+</ol>
+---
+
+5. Instal Aplikasi dari GitHub
+
+Setelah masuk ke server melalui SSH, jalankan perintah berikut untuk mengkloning aplikasi dari GitHub:
+
+cd /www/wwwroot/your-site-folder
+git clone https://github.com/username/repository-name.git
+
+Catatan: Gantilah username/repository-name dengan username dan nama repository GitHub yang sesuai.
+
+Setelah repositori dikloning, jalankan perintah berikut untuk menginstal dependensi:
+
+cd /www/wwwroot/your-site-folder
+composer install
+
+
+---
+
+6. Konfigurasi Database
+
+1. Masuk ke phpMyAdmin melalui aaPanel.
+
+
+2. Buat database baru dengan collation utf8mb4_unicode_ci.
+
+
+3. Import file SQL ke dalam database menggunakan phpMyAdmin:
+
+<ul>
+  <li>Path file SQL: `/www/wwwroot/your-site-folder/database/database.sql`.</li>
+</ul>
+
+Catatan: Jangan gunakan panel aaPanel untuk mengimpor SQL, lebih baik menggunakan phpMyAdmin.
+
+
+---
+
+7. Edit Konfigurasi
+
+Edit file konfigurasi aplikasi di /www/wwwroot/your-site-folder/config/config.php:
+
+<ul>
+  <li>Ubah pengaturan seperti path login admin sesuai preferensi Anda.</li>
+  <li>Isi informasi database (gunakan username <code>root</code> dan password root di config.php).</li>
+</ul>
+---
+
+8. Konfigurasi Direktori dan Pseudo-Static
+
+Edit pengaturan URL Rewrite untuk situs Anda dengan menambahkan kode berikut pada bagian Conf:
+
+location / {
+    try_files $uri $uri/ /$uri.php?$args;
+}
+
+
+---
+
+9. Menambahkan SSL ke Website
+
+1. Edit Situs > Conf > SSL.
+
+
+2. Periksa domain situs dan ajukan sertifikat SSL.
+
+
+3. Aktifkan Force HTTPS.
+
+
+4. Restart Nginx untuk menerapkan perubahan.
+
+
+
+
+---
+
+Dukungan
+
+Jika Anda mengalami masalah atau memiliki pertanyaan, jangan ragu untuk membuka issue di repository ini atau menghubungi kami melalui email support@example.com.
+
+
+---
+
+Dengan panduan di atas, Anda dapat dengan mudah mengonfigurasi server menggunakan aaPanel dan menginstal aplikasi dari GitHub. Pastikan untuk mengikuti langkah-langkah dengan teliti agar semua proses berjalan lancar.
+
+
+---
+
+Semoga panduan ini memudahkan Anda dalam menjalankan proyek Anda!
+
+Dengan menggunakan HTML di dalam file `README.md`, Anda bisa lebih fleksibel dalam mengatur tampilan dan penataan elemen-elemen konten. Anda bisa menggunakan tag `<ul>`, `<ol>`, `<li>`, `<b>`, `<code>`, dan lainnya untuk menyempurnakan struktur dan tampilannya.
+
