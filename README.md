@@ -1,172 +1,95 @@
+# Menggunakan aaPanel untuk Deploy Manual
 
-# Panduan Instalasi Raxnet dengan aaPanel di Ubuntu
+### 1. Konfigurasi aaPanel
 
-<div align="center" style="padding: 20px; background-color: #f3f4f6; border-radius: 10px;">
-    <img src="https://github.com/raxnet/vpn/blob/main/raxnet.png?raw=true" alt="Raxnet Logo" width="200">
-    <h1>Welcome to <span style="color: #ff5733;">RAXNET</span></h1>
-    <p>Your All-in-One Networking Solution</p>
-</div>
+Anda perlu memilih sistem yang digunakan di aaPanel untuk mendapatkan metode instalasi. Di sini, CentOS 7+ digunakan sebagai lingkungan sistem untuk instalasi.
 
----
+Pastikan untuk menggunakan CentOS 7+ untuk menginstal aaPanel, karena sistem lain mungkin memiliki masalah yang tidak diketahui.
 
-## 1. Persiapan Instalasi aaPanel
+yum install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh
 
-Pastikan Anda menggunakan **Ubuntu 18.04** atau versi yang lebih baru. Ikuti langkah-langkah di bawah ini untuk menginstal aaPanel:
+Setelah instalasi selesai, masuk ke aaPanel untuk menginstal lingkungan.
 
-```bash
-sudo apt update && sudo apt install -y wget && wget -O install.sh http://www.aapanel.com/script/install_6.0_en.sh && bash install.sh
-```
+Pilih metode instalasi lingkungan menggunakan LNMP dan periksa informasi berikut:
 
-Setelah instalasi selesai, akses aaPanel dan pilih metode instalasi **LNMP** dengan komponen berikut:
+☑️ Nginx  
+☑️ MySQL  
+☑️ PHP 7.4  
+☑️ phpMyAdmin
 
-- **Web Server**: Nginx
-- **Database**: MySQL
-- **PHP**: PHP 7.4
-- **Manajemen Database**: phpMyAdmin
+Pilih "Fast" untuk kompilasi dan instalasi.
 
-Gunakan opsi **Cepat** untuk instalasi otomatis.
+### 2. Instal Ioncube dan fileinfo
+aaPanel > App Store > PHP 7.4 > Setting > Install extensions > Ioncube, fileinfo.
 
----
+### 3. Hapus fungsi yang dinonaktifkan
+aaPanel > App Store > PHP 7.4 > Setting > Disabled functions > hapus dari daftar (exec, system, putenv, proc_open).
 
-## 2. Instal Ekstensi Fileinfo
+### 4. Tambahkan Website
+aaPanel > Website > Add site.  
+- Isi nama domain yang mengarah ke server di kolom Domain  
+- Pilih MySQL di Database  
+- Pilih PHP-74 di PHP Version
 
-Untuk memastikan kompatibilitas dengan beberapa aplikasi, Anda perlu menginstal ekstensi **fileinfo** pada PHP 7.4 di aaPanel:
+### 5. Instal Raxnet
+Setelah login ke server melalui SSH, kunjungi path situs: `cd /www/wwwroot/tld.com`
 
-1. Buka **App Store** di aaPanel, pilih **PHP 7.4**, kemudian klik **Pengaturan**.
-2. Pilih **Instal ekstensi**, cari dan instal **fileinfo**.
+Perintah-perintah berikut perlu dijalankan di direktori situs.
 
----
+### Hapus file di direktori
 
-## 3. Mengonfigurasi Fungsi PHP
+chattr -i .user.ini
 
-Agar sistem berjalan dengan lancar, pastikan beberapa fungsi PHP yang tidak diperlukan dinonaktifkan. Ikuti langkah-langkah berikut:
+rm -rf .htaccess 404.html index.html
 
-1. Buka **App Store** > **PHP 7.4** > **Pengaturan** > **Fungsi yang dinonaktifkan**.
-2. Hapus fungsi berikut dari daftar: `exec`, `system`, `putenv`, `proc_open`.
+### Jalankan perintah untuk menginstal Raxnet
 
----
+cd /www/wwwroot/tld.com
 
-## 4. Menambahkan Situs Web ke aaPanel
+wget https://github.com/user-attachments/files/18687948/raxnet.zip
 
-Untuk menambahkan situs web baru ke aaPanel, ikuti langkah-langkah berikut:
+unzip raxnet.zip
 
-1. Buka **Situs Web** > **Tambahkan Situs** di aaPanel.
-2. Masukkan domain yang diarahkan ke server pada kolom **Domain**.
-3. Pilih **MySQL** untuk **Database**.
-4. Pilih **PHP-74** untuk **Versi PHP**.
+composer install
 
----
+rm -rf raxnet.zip
 
-## 5. Instalasi Raxnet
+mv .user.ini /www/wwwroot/tld.com/public
 
-Setelah akses SSH ke server, ikuti langkah-langkah berikut untuk menginstal Raxnet:
+cd /www/wwwroot/tld.com/public
 
-1. Masuk ke direktori root situs web Anda:
-   ```bash
-   cd /www/wwwroot/tld.com
-   ```
-2. Hapus file yang mungkin ada dalam direktori tersebut:
-   ```bash
-   chattr -i .user.ini
-   rm -rf .htaccess 404.html index.html
-   ```
-3. Unduh dan ekstrak Raxnet:
-   ```bash
-   wget https://github.com/user-attachments/files/18683646/website_vpn_v1.zip
-   ```
-4. Perbarui dependensi menggunakan Composer:
-   ```bash
-   composer install
-   ```
-5. Hapus file zip setelah ekstraksi selesai:
-   ```bash
-   rm -rf website_vpn.zip
-   ```
+chattr +i .user.ini
 
----
+aaPanel > Databases > Root password
 
-## 6. Menambahkan SSL untuk Keamanan
+Login ke phpMyAdmin dengan username root dan password root database Anda.
 
-Untuk menambahkan lapisan keamanan SSL ke situs web, ikuti langkah-langkah berikut:
+Server connection collation: `utf8mb4_unicode_ci`
 
-1. Masuk ke konfigurasi situs yang baru ditambahkan di aaPanel.
-2. Pilih tab **SSL** dan aktifkan sertifikat SSL untuk domain Anda.
-3. Pastikan opsi **Paksa HTTPS** diaktifkan untuk mengamankan komunikasi situs.
-4. Setelah SSL diaktifkan, restart nginx untuk menerapkan perubahan.
+Buat database baru dengan: `utf8mb4_unicode_ci` 
 
----
+- Import `database.sql` dengan phpMyAdmin.  
+  - path file: `/www/wwwroot/tld.com/database/database.sql`  
+  - NB: Jangan gunakan panel aaPanel untuk mengimpor sql
 
-## 7. Integrasi Payment Gateway
+- Edit konfigurasi di `/www/wwwroot/tld.com/config/config.php`  
+  - Anda dapat mengubah path login admin sesuai dengan preferensi Anda. Harus dimulai dengan `/`.  
+  - Isi informasi database Anda (gunakan root sebagai username dan password root di config.php).
 
-Untuk memfasilitasi pembayaran online, Anda dapat mengintegrasikan berbagai Payment Gateway berikut:
+### 6. Konfigurasi direktori situs dan pseudo-static
 
-- **Midtrans**: Terintegrasi penuh dan siap digunakan.
-- **Duitku**: Proses pembuatan sedang berlangsung. Nantikan pembaruan lebih lanjut.
-- **Xendit**: Proses pembuatan sedang berlangsung. Pembaruan akan diberikan segera setelah selesai.
-- **Tripay**: Proses pembuatan sedang berlangsung dan sedang dalam tahap pengujian.
+Edit situs yang ditambahkan > Conf > Site directory > Pilih running directory `/public` dan simpan.
 
----
+Setelah penambahan selesai, edit situs yang ditambahkan > URL rewrite untuk mengisi informasi pseudo-static.
 
-## 8. Integrasi Cloudflare Anti-Bot
+location / { try_files $uri /index.php$is_args$args; }
 
-Untuk melindungi situs Anda dari serangan bot dan mengoptimalkan performa, Anda bisa mengonfigurasi Cloudflare Anti-Bot dengan langkah-langkah berikut:
+### 7. Tambahkan SSL ke website
 
-1. Masuk ke akun Cloudflare Anda.
-2. Pilih situs web yang ingin dilindungi.
-3. Aktifkan mode **Under Attack** untuk melindungi situs Anda dari serangan bot.
-4. Konfigurasi aturan firewall Cloudflare untuk mencegah akses dari IP yang mencurigakan.
+Edit situs yang ditambahkan > Conf > SSL  
+Periksa domain situs dan ajukan sertifikat, aktifkan Force HTTPS.
 
----
-
-## 9. API Endpoint ke Server X-Ray
-peringatan jangan install backend di server yang sama dengan fronend (aapanel)❗❗❗❗❗❗❗❗❗❗
+### Restart nginx
 
 
 
-
-## 10. Instalasi Server Backend
-
-Untuk menginstal server backend, ikuti langkah-langkah berikut:
-
-1. Pastikan sistem Anda sudah diperbarui:
-   ```bash
-   apt install -y && apt update -y && apt upgrade -y
-   ```
-2. Instal dependensi tambahan:
-   ```bash
-   apt install lolcat -y && gem install lolcat
-   ```
-3. Unduh dan jalankan skrip instalasi:
-   ```bash
-   wget -q https://raw.githubusercontent.com/raxnet/vpn/main/install.sh && chmod +x install.sh && ./install.sh
-   ```
-
----
-
-## 11. Update Sistem
-
-Untuk memperbarui sistem, jalankan perintah berikut:
-
-```bash
-wget https://raw.githubusercontent.com/raxnet/vpn/main/update.sh && chmod +x update.sh && ./update.sh
-```
-
----
-
-## 12. Dokumentasi dan Dukungan
-
-- **Dokumentasi**: [Lihat Wiki](https://github.com/username/repo/wiki)
-- **Laporkan Masalah**: [Buka Issue](https://github.com/username/repo/issues)
-- **Dukungan Email**: [support@raxnet.com](mailto:support@raxnet.com)
-
----
-
-## 13. Terhubung dengan Kami
-
-- **Twitter**: [Follow @raxnet](https://twitter.com/raxnet)
-- **Facebook**: [Like @raxnet](https://facebook.com/raxnet)
-- **GitHub**: [Star Repo](https://github.com/username/repo)
-
----
-
-Dengan mengikuti panduan ini, Anda dapat menginstal dan mengonfigurasi Raxnet dengan aaPanel di Ubuntu dengan mudah. Jika Anda memiliki pertanyaan atau masalah, jangan ragu untuk menghubungi tim dukungan kami.
