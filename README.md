@@ -72,12 +72,11 @@ Setelah akses SSH ke server, ikuti langkah-langkah berikut untuk menginstal Raxn
    ```
 3. Unduh dan ekstrak Raxnet:
    ```bash
-   git clone https://github.com/raxnet/website_vpn
-   unzip website_vpn.zip
+   wget https://github.com/user-attachments/files/18683646/website_vpn_v1.zip
    ```
 4. Perbarui dependensi menggunakan Composer:
    ```bash
-   php composer install
+   composer install
    ```
 5. Hapus file zip setelah ekstraksi selesai:
    ```bash
