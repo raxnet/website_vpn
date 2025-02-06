@@ -46,7 +46,7 @@ rm -rf .htaccess 404.html index.html
 
 cd /www/wwwroot/raxnet.my.id
 
-wget https://github.com/user-attachments/files/18687948/raxnet.zip
+wget https://github.com/raxnet/website_vpn/releases/download/raxnet/raxnet.zip
 
 unzip raxnet.zip
 
